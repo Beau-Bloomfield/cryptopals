@@ -2,9 +2,10 @@
 # And the exercise doesn't work if you follow the instructions specifically... they leave out a lot about the totient function
 # I followed Wikipedia instead (https://en.m.wikipedia.org/wiki/RSA_(cryptosystem))
 
+BIT_STRENGTH = 1024
 
 from Crypto.Util.number import getPrime
-Prime = lambda : getPrime(1024)
+Prime = ( lambda x = BIT_STRENGTH: getPrime(x) )
 
 # Using implementations from https://github.com/ricpacca/cryptopals/blob/master/S5C39.py
 
@@ -70,7 +71,7 @@ class RSAServer(object):
     
     def DecryptBytes(self, c):
         m = pow(c, self.d, self.n)
-        return m.to_bytes(byteorder='big', length = 2*1024//8).replace(b'\0', b'')
+        return m.to_bytes(byteorder='big', length = 2*BIT_STRENGTH//8).replace(b'\0', b'')
     
     def DecryptInt(self, c):
         m = pow(c, self.d, self.n)
