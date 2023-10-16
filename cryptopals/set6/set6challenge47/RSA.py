@@ -2,10 +2,13 @@
 # And the exercise doesn't work if you follow the instructions specifically... they leave out a lot about the totient function
 # I followed Wikipedia instead (https://en.m.wikipedia.org/wiki/RSA_(cryptosystem))
 
-BIT_STRENGTH = 32
+BIT_STRENGTH = 256
+
+# Let e be 3
+e = 3
 
 from Crypto.Util.number import getPrime
-Prime = ( lambda x = BIT_STRENGTH: getPrime(x) )
+Prime = ( lambda x = BIT_STRENGTH//2: getPrime(x) )
 
 # Using implementations from https://github.com/ricpacca/cryptopals/blob/master/S5C39.py
 
@@ -41,9 +44,6 @@ def ModInv(a, n):
 
 assert ModInv(17, 3120) == 2753
 
-# Let e be 3
-e = 3
-
 # The requirement regarding GCD is specified in Wikipedia, NOT the challenge itself
 
 def GeneratePrimes(e = e):
@@ -54,8 +54,6 @@ def GeneratePrimes(e = e):
 
         if 2 < e < et and GCD(e, et) == 1:
             return p, q, et
-
-p, q, et = GeneratePrimes()
 
 class RSAServer(object):
     def __init__(self, e = 3):
@@ -71,7 +69,7 @@ class RSAServer(object):
     
     def DecryptBytes(self, c):
         m = pow(c, self.d, self.n)
-        return m.to_bytes(byteorder='big', length = 2*BIT_STRENGTH//8)
+        return m.to_bytes(byteorder='big', length = BIT_STRENGTH//8)
     
     def DecryptInt(self, c):
         m = pow(c, self.d, self.n)
