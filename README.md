@@ -5,3 +5,5 @@ Eventually, the exercises became more intricate, so I switched to Python (3.10.6
 
 At a few points I did need to reference the work of other persons when I got stuck.  These instances should be mentioned throughout the comments,
 but in particular the solutions of Michael Cypher (presumably a pseudonym? https://cypher.codes/writing/cryptopals-challenge-set-3) were helpful.
+
+I also in several places used the solutions posted by Dr. Riccardo Paccagnella as a guide. (https://github.com/ricpacca/cryptopals)
